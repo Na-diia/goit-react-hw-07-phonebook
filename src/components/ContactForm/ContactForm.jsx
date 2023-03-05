@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 import styles from './contact-form.module.css';
 import { selectContacts } from "redux/selectors";
@@ -27,16 +28,21 @@ export const ContactForm = () => {
   };
 
   const isExist = contactName => {
-    return contacts.some(({ name }) => name === contactName);
+    return contacts.some(({ name }) => name.toLowerCase() === contactName.toLowerCase());
   };
 
   const  handleSubmit = (event) => {
     event.preventDefault();
     if (isExist(name)) {
-      alert(`${name} is already in contacts!`);
+      toast.warn(`${name} is already in contacts!`, {
+        theme: "dark"
+      });
       return;
     } else{
      dispatch(addContact({name, phone}));
+     toast.info("Successfully!", {
+      theme: "dark"
+     });
      reset();
     };
   };

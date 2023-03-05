@@ -1,3 +1,6 @@
+import { ToastContainer } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+
 import { ContactForm } from '../ContactForm/ContactForm';
 import { ContactList } from '../ContactList/ContactList';
 import { Filter } from '../Filter/Filter';
@@ -13,6 +16,7 @@ return (
     <h2 className={styles.name}>Contacts</h2>
     <Filter/>
     <ContactList/>
+    <ToastContainer autoClose={2000}/>
   </div>
   );
 };

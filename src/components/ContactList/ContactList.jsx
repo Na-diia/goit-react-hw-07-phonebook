@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -26,10 +28,17 @@ export const ContactList =() => {
 
   const foundContacts = findContact();
 
+  const removeContact = (id) => {
+    dispatch(deleteContact(id));
+    toast.info('The contact deleted!', {
+      theme: 'dark'
+    });
+  };
+
   const contacts = foundContacts.map(({id, name, phone}) => {
     return (<li key={id}><p className={styles.item}>{name} : {phone}</p>
     <button type="button" className={styles.delete}
-    onClick={() => dispatch(deleteContact(id))}>Delete</button></li>)});
+    onClick={() => removeContact(id)}>Delete</button></li>)});
 
   return(
     <ul className={styles.list}>
